@@ -1,0 +1,62 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# --- Virtual environments ---
+venv/
+env/
+ENV/
+.venv/
+.env
+
+# --- Jupyter Notebook ---
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
+
+# --- Trained models / large binaries ---
+models/*.h5
+models/*.keras
+models/*.pkl
+!models/README.md
+
+# --- Dataset (do not commit raw data; see dataset/README.md) ---
+dataset/*.csv
+!dataset/README.md
+
+# --- Logs & experiment tracking ---
+logs/
+*.log
+mlruns/
+wandb/
+
+# --- OS / Editor ---
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+
+# --- Streamlit ---
+.streamlit/
+
+# --- Misc generated artifacts ---
+models/training_summary.json
+models/evaluation_metrics.json

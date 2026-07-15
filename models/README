@@ -1,0 +1,49 @@
+# Trained Model Artifacts
+
+This folder holds the artifacts produced by `src/train.py`:
+
+| File | Description |
+|---|---|
+| `trained_model.h5` | The trained Keras MLP model (HDF5 format) |
+| `scaler.pkl` | Fitted `MinMaxScaler` used to normalize input features |
+| `label_encoder.pkl` | Fitted `LabelEncoder` (B → 0, M → 1) |
+| `training_summary.json` | Final train/val accuracy & loss after training |
+| `evaluation_metrics.json` | Test-set accuracy, precision, recall, F1, AUC |
+
+## Why isn't `trained_model.h5` committed to this repository?
+
+Trained model binaries are intentionally **excluded via `.gitignore`**. This
+is standard practice for ML repositories because:
+
+1. Binary model files are large and bloat git history.
+2. The model is fully **reproducible** in under a minute of CPU time from the
+   provided code and dataset.
+3. It keeps the repository lightweight and avoids Git LFS requirements.
+
+## How to generate `trained_model.h5`
+
+From the repository root, with `requirements.txt` installed:
+
+```bash
+pip install -r requirements.txt
+python src/train.py
+```
+
+This will:
+1. Load and preprocess the WDBC dataset (auto-downloads/falls back as described in `dataset/README.md`).
+2. Build the MLP architecture (`src/model.py`).
+3. Train for up to 100 epochs (Adam optimizer, batch size 32, early stopping on `val_accuracy` with patience 10).
+4. Save the best model to `models/trained_model.h5`.
+5. Save `models/scaler.pkl` and `models/label_encoder.pkl` for use in `src/predict.py` / `app.py`.
+6. Save training curves to `images/accuracy.png` and `images/loss.png`.
+
+Expected runtime: **< 2 minutes on CPU** (the model is small — under 1,000 trainable parameters).
+
+Once trained, evaluate it with:
+
+```bash
+python src/evaluate.py
+```
+
+which writes `images/confusion_matrix.png`, `images/roc_curve.png`, and
+`models/evaluation_metrics.json`.

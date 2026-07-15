@@ -13,7 +13,7 @@ Pipeline:
     4. Min-Max scale all 30 numeric features to the range [0, 1].
     5. Stratified train/test split (75% / 25%) to preserve class balance.
 
-Author: SK Salma, P. Durgamma, Nithiasri S
+Author: SK Salma
 """
 
 import os
